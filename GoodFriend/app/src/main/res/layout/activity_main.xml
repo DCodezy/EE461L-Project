@@ -28,7 +28,7 @@
             android:paddingTop="8dp">
 
             <TextView
-                android:id="@android:id/text1"
+                android:id="@+id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -42,9 +42,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@android:id/text1"
-                android:layout_alignLeft="@android:id/text1"
-                android:layout_below="@android:id/text1"
+                android:layout_alignStart="@id/text1"
+                android:layout_alignLeft="@id/text1"
+                android:layout_below="@id/text1"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:text="Days"

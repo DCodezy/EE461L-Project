@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,19 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        TextView dayCounter = (TextView) findViewById(R.id.text1);
+        for(int i = 0; i < 10; i++){
+            for(int j = 1; j < 31; j++){
+                dayCounter.setText(Integer.toString(j));
+
+            }
+        }
+        dayCounter.setText("20");
     }
 
     @Override
