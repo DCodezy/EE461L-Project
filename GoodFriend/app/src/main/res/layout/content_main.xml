@@ -54,7 +54,7 @@
                     android:text="Current Risk:"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/box1_subtext"
                     android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                     android:text="Mild"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="28sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -89,7 +89,7 @@
                     android:text="Stage:"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="21sp" />
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/box2_subtext"
                     android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
                     android:text="Renewed"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="28sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -136,7 +136,7 @@
                     android:text="Biggest Risk:"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="21sp" />
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/box3_subtext"
                     android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
                     android:text="Social gatherings with friends who still smoke"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -183,7 +183,7 @@
                     android:text="Friendly advice:"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="21sp" />
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/box4_subtext"
                     android:layout_width="wrap_content"
@@ -192,7 +192,7 @@
                     android:text="Sprint for 5 minutes today"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
