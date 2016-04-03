@@ -193,6 +193,12 @@
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
+
+                <Button
+                    android:id = "@+id/tempButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Switch view" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
