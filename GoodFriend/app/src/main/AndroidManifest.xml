@@ -38,7 +38,43 @@
                 android:value="com.goodfriend.goodfriend.NotifyMessage" />
         </activity>
 
+<<<<<<< HEAD
         <service android:name=".NotificationSender" />
+=======
+        <activity
+            android:name=".HabitSelect"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.goodfriend.goodfriend.MainActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".SmokeAidSelect"
+            android:label="@string/app_name"
+            android:parentActivityName=".HabitSelect"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.goodfriend.goodfriend.HabitSelect" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+>>>>>>> 3c921afac5560b05f3cb7c6ee4263857cf6fc5e2
     </application>
 
 </manifest>
