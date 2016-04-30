@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.text.SimpleDateFormat;
@@ -45,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     private static Habit.UserState userState;
 
-
+    private String [] friendlyAdviceList = {
+                    "Try going outside and taking 10 deep breaths!" +
+                    "Socialize! Spark up a conversation with the person closest to you" +
+                    "Find a time to hug your closest friend =)" +
+                    "Think good thoughts! Mentally recite 10 things you are thankful for!"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //else {
 
-
-        /*Tom Added*/
-        startService(new Intent(getBaseContext(), NotificationSender.class));
-
-        sendNotification();
+        sendNotification("How are you?");
 
         setContentView(R.layout.activity_main);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -165,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-           sendNotification();
+           sendNotification("How are you?");
             return true;
         }
         else if (id == R.id.addHabit){
@@ -178,13 +181,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void sendNotification()
+    public void sendNotification(String message)
     {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.heart)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle("Hey!")
+                        .setContentText(message);
         Intent resultIntent = new Intent(this, TraitsInput.class);
         // Because clicking the notification opens a new ("special") activity, there's
         // no need to create an artificial back stack.
@@ -209,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void statusNotificationChecker() {
         if(true){
-        sendNotification();
+        sendNotification("How are you?");
         }
     }
 }
