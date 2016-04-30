@@ -77,29 +77,31 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(STATEKEY, Habit.UserState.NORMAL.toString());
             editor.commit();
             userState = Habit.UserState.NORMAL;
+            //setContentView(R.layout.habit_select);
         }
+        //else {
+            /*Tom Added*/
+                startService(new Intent(getBaseContext(), NotificationSender.class));
 
-        /*Tom Added*/
-        startService(new Intent(getBaseContext(), NotificationSender.class));
+                setContentView(R.layout.activity_main);
+            /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);*/
+                Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+                setSupportActionBar(mToolbar);
+                getSupportActionBar().setTitle(getDayOfWeek());
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_main);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getDayOfWeek());
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                Button tempButton = (Button) findViewById(R.id.tempButton);
 
-        Button tempButton = (Button) findViewById(R.id.tempButton);
+                tempButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
+                        startActivity(intent);
+                    }
+                });
 
-        tempButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
-                startActivity(intent);
-            }
-        } );
-
+    }
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-    }
+   // }
 
     public String getDayOfWeek(){
         String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
@@ -171,6 +173,10 @@ public class MainActivity extends AppCompatActivity {
             mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
             return true;
+        }
+        else if (id == R.id.addHabit){
+            Intent intent = new Intent(getApplicationContext(), HabitSelect.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
