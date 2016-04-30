@@ -20,6 +20,22 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="How are you feeling right now?"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Enter your stress level\n\n\n"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -41,16 +57,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Stress Level : ??"
+            android:text="Stress Level : "
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <EditText
+       <!-- <EditText
             android:id="@+id/textInput"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint=""
-            android:inputType="text" />
+            android:inputType="text" />-->
 
         <Button
             android:id = "@+id/buttonInput"
@@ -59,13 +75,21 @@
             android:text="Submit" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="\n\n"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <!--<TextView
             android:id = "@+id/trait1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Stress Level : ??"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="20sp" />-->
 
 
 
