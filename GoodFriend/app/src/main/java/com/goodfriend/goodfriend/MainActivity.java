@@ -82,9 +82,6 @@ public class MainActivity extends AppCompatActivity {
         //else {
 
 
-        /*Tom Added*/
-        startService(new Intent(getBaseContext(), NotificationSender.class));
-
         sendNotification();
 
         setContentView(R.layout.activity_main);
