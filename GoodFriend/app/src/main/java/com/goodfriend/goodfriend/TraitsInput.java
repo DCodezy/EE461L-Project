@@ -91,13 +91,10 @@ public class TraitsInput extends AppCompatActivity {
                     long days = ((currentTime - startTime) / 1000) / 86400;
                     NicotineHabit h = new NicotineHabit(session.getBoolean(AIDKEY, true));
                     h.recalculateState((int) days, trait);
-                    Habit.UserState x = h.getState();
 
                     SharedPreferences.Editor editor = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
-                    editor.putBoolean(INITKEY, Boolean.TRUE);
-
-
-
+                    editor.putString(STATEKEY, h.getState().toString());
+                    editor.commit();
 
                 } catch (NumberFormatException e) {
                 }
