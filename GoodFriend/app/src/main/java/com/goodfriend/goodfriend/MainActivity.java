@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String AIDKEY = "aid";
     //key for current user state
     public static final String STATEKEY = "state";
+    //key for last stress input
+    public static final String STRESSKEY = "stress";
 
     private static Habit.UserState userState;
 
@@ -143,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
             }
             TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
             box1_subtext.setText(text);
+
+            TextView box2_subtext = (TextView) findViewById(R.id.box2_subtext);
+            box2_subtext.setText(session.getInt(STRESSKEY, 0)+"");
 
         System.out.println(initialized + " above method");
 

@@ -29,6 +29,8 @@ public class TraitsInput extends AppCompatActivity {
     public static final String AIDKEY = "aid";
     //key for current user state
     public static final String STATEKEY = "state";
+    //key for last stress input
+    public static final String STRESSKEY = "stress";
 
     private SeekBar traitsBar = null;
     private TextView traitBar = null;
@@ -89,7 +91,6 @@ public class TraitsInput extends AppCompatActivity {
                     if (trait > 10) {
                         throw new NumberFormatException();
                     }
-
                     SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
                     long startTime = session.getLong(TIMEKEY, -1);
                     long currentTime = System.currentTimeMillis();
@@ -100,6 +101,10 @@ public class TraitsInput extends AppCompatActivity {
 
                     SharedPreferences.Editor editor = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
                     editor.putString(STATEKEY, h.getState().toString());
+                    editor.commit();
+
+                    //set stress state
+                    editor.putInt(STRESSKEY, trait);
                     editor.commit();
                     finish();
 
