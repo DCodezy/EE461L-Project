@@ -58,9 +58,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
         //Has this app been launched before?
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
-        //initialized = false;
-        System.out.println("" + initialized + "kkkkkkkk\n");
-        if(initialized){
+        if(!initialized){
             setContentView(R.layout.habit_select);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -88,8 +86,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         else {
-            /*Tom Added*/
-            startService(new Intent(getBaseContext(), NotificationSender.class));
 
             setContentView(R.layout.activity_main);
             /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -132,32 +128,26 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
-        String text = session.getString(STATEKEY, "Unknown");
-        if(text.equals("NORMAL"))
-            text = "Normal";
-        else if(text.equals("MED_RISK"))
-            text = "Some Risk";
-        else if(text.equals("HIGH_RISK"))
-            text  = "High Risk";
 
-        TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
-        box1_subtext.setText(text);
-
-        TextView dayCounter = (TextView) findViewById(R.id.text1);
-        //get the current time and the time at initialization
-
-        long startTime = session.getLong(TIMEKEY, -1);
-        long currentTime = System.currentTimeMillis();
-        //divide by 1000 for ms->s then by 86400 for s->days
-        long days = ((currentTime - startTime)/1000)/86400;
-        dayCounter.setText(days + "");
-        SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
-        //Has this app been launched before?
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
-        //initialized = false;
-        if (!initialized) {
+        if(initialized) {
+            String text = session.getString(STATEKEY, "Unknown");
+            if (text.equals("NORMAL"))
+                text = "Normal";
+            else if (text.equals("MED_RISK"))
+                text = "Some Risk";
+            else if (text.equals("HIGH_RISK"))
+                text = "High Risk";
+
+            TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
+            box1_subtext.setText(text);
+
+        System.out.println(initialized + " above method");
+
+            System.out.println("inside method");
             TextView dayCounter = (TextView) findViewById(R.id.text1);
             //get the current time and the time at initialization
+
             long startTime = session.getLong(TIMEKEY, -1);
             long currentTime = System.currentTimeMillis();
             //divide by 1000 for ms->s then by 86400 for s->days
