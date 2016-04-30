@@ -50,14 +50,15 @@
             android:layout_margin="10dp"
             android:progress="20"
             android:progressDrawable="@drawable/progressbar"
-            android:secondaryProgress="20"/>
+            android:secondaryProgress="20"
+            android:max="10"/>
 
         <TextView
             android:id = "@+id/traitBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Stress Level : "
+            android:text=""
             android:textColor="#ffffff"
             android:textSize="20sp" />
 

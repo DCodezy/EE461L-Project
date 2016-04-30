@@ -71,38 +71,37 @@ public class MainActivity extends AppCompatActivity {
 
                     SharedPreferences.Editor editor = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
 
-                    //perform initialization actions
-                    //store current timestamp for future use
-                    editor.putLong(TIMEKEY, System.currentTimeMillis());
-                    editor.commit();
+            //store aided key
+            editor.putBoolean(AIDKEY, true);
+            editor.commit();
 
                     Intent intent = new Intent(getApplicationContext(), SmokeAidSelect.class);
                     startActivity(intent);
                 }
             });
         }
-        else {
+        //else {
             /*Tom Added*/
-            startService(new Intent(getBaseContext(), NotificationSender.class));
+                startService(new Intent(getBaseContext(), NotificationSender.class));
 
-            setContentView(R.layout.activity_main);
+                setContentView(R.layout.activity_main);
             /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);*/
-            Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-            setSupportActionBar(mToolbar);
-            getSupportActionBar().setTitle(getDayOfWeek());
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+                setSupportActionBar(mToolbar);
+                getSupportActionBar().setTitle(getDayOfWeek());
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            Button tempButton = (Button) findViewById(R.id.tempButton);
+                Button tempButton = (Button) findViewById(R.id.tempButton);
 
-            tempButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
-                    startActivity(intent);
-                }
-            });
-        }
+                tempButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
+                        startActivity(intent);
+                    }
+                });
+
     }
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +121,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+
+        SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+        String text = session.getString(STATEKEY, "Unknown");
+        if(text.equals("NORMAL"))
+            text = "Normal";
+        else if(text.equals("MED_RISK"))
+            text = "Some Risk";
+        else if(text.equals("HIGH_RISK"))
+            text  = "High Risk";
+
+        TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
+        box1_subtext.setText(text);
+
+        TextView dayCounter = (TextView) findViewById(R.id.text1);
+        //get the current time and the time at initialization
+
+        long startTime = session.getLong(TIMEKEY, -1);
+        long currentTime = System.currentTimeMillis();
+        //divide by 1000 for ms->s then by 86400 for s->days
+        long days = ((currentTime - startTime)/1000)/86400;
+        dayCounter.setText(days + "");
         SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
         //Has this app been launched before?
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
@@ -143,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -186,8 +207,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Method to stop the service
-    public void stopService(View view) {
-        stopService(new Intent(getBaseContext(), NotificationSender.class));
+
+    public void sendNotification()
+    {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.heart)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+        Intent resultIntent = new Intent(this, TraitsInput.class);
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        // Sets an ID for the notification
+        int mNotificationId = 001;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+    }
+    public void statusNotificationChecker() {
+        if(true){
+        sendNotification();
+        }
     }
 }

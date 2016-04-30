@@ -1,5 +1,8 @@
 package com.goodfriend.goodfriend;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,13 +14,31 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+
+
 public class TraitsInput extends AppCompatActivity {
+
+
+    //key for privacy preferences
+    public static final String PREFKEY = "pref";
+    //key for init state
+    public static final String INITKEY = "init";
+    //key for initial launch time stamp
+    public static final String TIMEKEY = "time";
+    //key for aided/unaided
+    public static final String AIDKEY = "aid";
+    //key for current user state
+    public static final String STATEKEY = "state";
 
     private SeekBar traitsBar = null;
     private TextView traitBar = null;
     private TextView traitOne = null;
     private EditText traitTextInput = null;
     private Button submitButton = null;
+
+    public void returnToSender(){
+        this.finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +49,6 @@ public class TraitsInput extends AppCompatActivity {
 
         traitsBar = (SeekBar) findViewById(R.id.seek1);
         traitBar = (TextView) findViewById(R.id.traitBar);
-        //traitOne = (TextView) findViewById(R.id.trait1);
-        //traitTextInput = (EditText) findViewById(R.id.textInput);
         submitButton = (Button) findViewById(R.id.buttonInput);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -56,7 +75,7 @@ public class TraitsInput extends AppCompatActivity {
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-                traitBar.setText("Stress Level: " + progressChanged);
+                traitBar.setText(progressChanged+"");
             }
         });
 
@@ -65,11 +84,29 @@ public class TraitsInput extends AppCompatActivity {
             public void onClick(View v) {
                 int trait = -1;
                 try {
-                    trait = Integer.parseInt(traitTextInput.getText().toString());
-                } catch (NumberFormatException e){
+                    String text = traitBar.getText().toString();
+                    trait = Integer.parseInt(text);
+                    if (trait > 10) {
+                        throw new NumberFormatException();
+                    }
 
+                    SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+                    long startTime = session.getLong(TIMEKEY, -1);
+                    long currentTime = System.currentTimeMillis();
+                    //divide by 1000 for ms->s then by 86400 for s->days
+                    long days = ((currentTime - startTime) / 1000) / 86400;
+                    NicotineHabit h = new NicotineHabit(session.getBoolean(AIDKEY, true));
+                    h.recalculateState((int) days, trait);
+
+                    SharedPreferences.Editor editor = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
+                    editor.putString(STATEKEY, h.getState().toString());
+                    editor.commit();
+                    finish();
+
+                } catch (NumberFormatException e) {
+                    System.out.println("FAILURE");
                 }
-                traitOne.setText("Stress Level: " + trait);
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
