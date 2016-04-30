@@ -6,9 +6,13 @@
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.8" />
         <option name="gradleJvm" value="1.7" />
 =======
+=======
+        <option name="gradleHome" value="D:\Programs\Android Studio\gradle\gradle-2.8" />
+>>>>>>> d6e9d65f9394b7134b1dfd188eb5a09dba454631
         <option name="gradleJvm" value="1.8" />
 >>>>>>> ba7e081df2505bb80fa8dfbb0d271f21576af03f
         <option name="modules">
