@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">GoodFriend</string>
-    <string name="action_settings">Settings</string>
-    <string name="test_Notification">Settings</string>
+    <string name="action_settings">TestNotification!!</string>
     <string name="title_activity_traits_input">TraitsInput</string>
 </resources>

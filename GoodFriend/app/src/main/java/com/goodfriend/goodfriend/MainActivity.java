@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                             .setSmallIcon(R.mipmap.heart)
                             .setContentTitle("My notification")
                             .setContentText("Hello World!");
-            Intent resultIntent = new Intent(this, NotifyMessage.class);
+            Intent resultIntent = new Intent(this, TraitsInput.class);
             // Because clicking the notification opens a new ("special") activity, there's
             // no need to create an artificial back stack.
             PendingIntent resultPendingIntent =
