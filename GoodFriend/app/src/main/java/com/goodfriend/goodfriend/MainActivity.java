@@ -77,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(STATEKEY, Habit.UserState.NORMAL.toString());
             editor.commit();
             userState = Habit.UserState.NORMAL;
+            //setContentView(R.layout.habit_select);
         }
+        //else {
 
-        /*Tom Added*/
-        startService(new Intent(getBaseContext(), NotificationSender.class));
+
+        sendNotification();
 
         setContentView(R.layout.activity_main);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } );
 
+    }
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-    }
+   // }
 
     public String getDayOfWeek(){
         String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
@@ -135,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -144,41 +148,51 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.mipmap.heart)
-                            .setContentTitle("My notification")
-                            .setContentText("Hello World!");
-            Intent resultIntent = new Intent(this, NotifyMessage.class);
-            // Because clicking the notification opens a new ("special") activity, there's
-            // no need to create an artificial back stack.
-            PendingIntent resultPendingIntent =
-                    PendingIntent.getActivity(
-                            this,
-                            0,
-                            resultIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                    );
-
-            mBuilder.setContentIntent(resultPendingIntent);
-
-            // Sets an ID for the notification
-            int mNotificationId = 001;
-            // Gets an instance of the NotificationManager service
-            NotificationManager mNotifyMgr =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            // Builds the notification and issues it.
-            mNotifyMgr.notify(mNotificationId, mBuilder.build());
-
+           sendNotification();
             return true;
+        }
+        else if (id == R.id.addHabit){
+            Intent intent = new Intent(getApplicationContext(), HabitSelect.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
 
-    // Method to stop the service
-    public void stopService(View view) {
-        stopService(new Intent(getBaseContext(), NotificationSender.class));
+
+    public void sendNotification()
+    {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.heart)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+        Intent resultIntent = new Intent(this, TraitsInput.class);
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        // Sets an ID for the notification
+        int mNotificationId = 001;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+    }
+    public void statusNotificationChecker() {
+        if(true){
+        sendNotification();
+        }
     }
 }
