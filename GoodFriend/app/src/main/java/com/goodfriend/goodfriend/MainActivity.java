@@ -93,28 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        //else {
 
-        sendNotification("How are you?");
-
-        setContentView(R.layout.activity_main);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getDayOfWeek());
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        Button tempButton = (Button) findViewById(R.id.tempButton);
-
-        tempButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
-                startActivity(intent);
-
-            }
-        } );
         else {
 
             setContentView(R.layout.activity_main);
@@ -209,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                             .setSmallIcon(R.mipmap.heart)
                             .setContentTitle("My notification")
                             .setContentText("Hello World!");
-            Intent resultIntent = new Intent(this, NotifyMessage.class);
+            Intent resultIntent = new Intent(this, TraitsInput.class);
             // Because clicking the notification opens a new ("special") activity, there's
             // no need to create an artificial back stack.
             PendingIntent resultPendingIntent =
