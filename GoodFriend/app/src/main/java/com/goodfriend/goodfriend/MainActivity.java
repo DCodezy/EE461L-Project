@@ -1,6 +1,8 @@
 package com.goodfriend.goodfriend;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,11 +15,38 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
+
+    //key for privacy preferences
+    public static final String PREFKEY = "pref";
+    //key for init state
+    public static final String INITKEY = "init";
+    //key for initial launch time stamp
+    public static final String TIMEKEY = "time";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        //Following is to check if app has been launched before
+        SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+        //Has this app been launched before?
+        boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
+        if(!initialized){
+            //set initialized to true
+            SharedPreferences.Editor editor = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
+            editor.putBoolean(INITKEY, Boolean.TRUE);
+            editor.commit();
+            //perform initialization actions
+            //store current timestamp for future use
+            editor.putLong(TIMEKEY, System.currentTimeMillis());
+            editor.commit();
+        }
+
+
         setContentView(R.layout.activity_main);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
@@ -50,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         TextView dayCounter = (TextView) findViewById(R.id.text1);
-        for(int i = 0; i < 10; i++){
-            for(int j = 1; j < 31; j++){
-                dayCounter.setText(Integer.toString(j));
-
-            }
-        }
-        dayCounter.setText("20");
+        //get the current time and the time at initialization
+        SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+        long startTime = session.getLong(TIMEKEY, -1);
+        long currentTime = System.currentTimeMillis();
+        //divide by 1000 for ms->s then by 86400 for s->days
+        long days = ((currentTime - startTime)/1000)/86400;
+        dayCounter.setText(days+"");
     }
 
     @Override
