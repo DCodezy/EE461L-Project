@@ -12,11 +12,5 @@
         android:orderInCategory="200"
         android:title="@string/test_Notification"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/addHabit"
-        android:orderInCategory="200"
-        android:title="@string/title_add_habit"
-        android:text="Add Habit"
-        app:showAsAction="never" />
 
 </menu>

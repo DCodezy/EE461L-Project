@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Habit.UserState userState;
 
-
+    private Button smokeButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,50 +57,52 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
         //Has this app been launched before?
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
-        if(!initialized){
+        //initialized = false;
+        System.out.println("" + initialized + "kkkkkkkk\n");
+        if(initialized){
+            setContentView(R.layout.habit_select);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-            //set initialized to true
-            SharedPreferences.Editor editor = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(INITKEY, Boolean.TRUE);
-            editor.commit();
+            smokeButton = (Button) findViewById(R.id.buttonHabitSmoking);
+            smokeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            //perform initialization actions
-            //store current timestamp for future use
-            editor.putLong(TIMEKEY, System.currentTimeMillis());
-            editor.commit();
+                    SharedPreferences.Editor editor = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
 
-            //store aided key
-            editor.putBoolean(AIDKEY, true);
-            editor.commit();
+                    //perform initialization actions
+                    //store current timestamp for future use
+                    editor.putLong(TIMEKEY, System.currentTimeMillis());
+                    editor.commit();
 
-            //user starts as normal state
-            editor.putString(STATEKEY, Habit.UserState.NORMAL.toString());
-            editor.commit();
-            userState = Habit.UserState.NORMAL;
-            //setContentView(R.layout.habit_select);
+                    Intent intent = new Intent(getApplicationContext(), SmokeAidSelect.class);
+                    startActivity(intent);
+                }
+            });
         }
-        //else {
+        else {
             /*Tom Added*/
-                startService(new Intent(getBaseContext(), NotificationSender.class));
+            startService(new Intent(getBaseContext(), NotificationSender.class));
 
-                setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main);
             /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);*/
-                Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-                setSupportActionBar(mToolbar);
-                getSupportActionBar().setTitle(getDayOfWeek());
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setTitle(getDayOfWeek());
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-                Button tempButton = (Button) findViewById(R.id.tempButton);
+            Button tempButton = (Button) findViewById(R.id.tempButton);
 
-                tempButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
-                        startActivity(intent);
-                    }
-                });
-
+            tempButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -120,14 +122,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        TextView dayCounter = (TextView) findViewById(R.id.text1);
-        //get the current time and the time at initialization
-        SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
-        long startTime = session.getLong(TIMEKEY, -1);
-        long currentTime = System.currentTimeMillis();
-        //divide by 1000 for ms->s then by 86400 for s->days
-        long days = ((currentTime - startTime)/1000)/86400;
-        dayCounter.setText(days + "");
+        SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+        //Has this app been launched before?
+        boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
+        //initialized = false;
+        if (!initialized) {
+            TextView dayCounter = (TextView) findViewById(R.id.text1);
+            //get the current time and the time at initialization
+            long startTime = session.getLong(TIMEKEY, -1);
+            long currentTime = System.currentTimeMillis();
+            //divide by 1000 for ms->s then by 86400 for s->days
+            long days = ((currentTime - startTime) / 1000) / 86400;
+            dayCounter.setText(days + "");
+        }
     }
 
     @Override
@@ -173,10 +180,6 @@ public class MainActivity extends AppCompatActivity {
             mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
             return true;
-        }
-        else if (id == R.id.addHabit){
-            Intent intent = new Intent(getApplicationContext(), HabitSelect.class);
-            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
