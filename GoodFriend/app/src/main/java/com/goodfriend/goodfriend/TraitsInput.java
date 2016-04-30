@@ -1,5 +1,7 @@
 package com.goodfriend.goodfriend;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,7 +13,21 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+
+
 public class TraitsInput extends AppCompatActivity {
+
+
+    //key for privacy preferences
+    public static final String PREFKEY = "pref";
+    //key for init state
+    public static final String INITKEY = "init";
+    //key for initial launch time stamp
+    public static final String TIMEKEY = "time";
+    //key for aided/unaided
+    public static final String AIDKEY = "aid";
+    //key for current user state
+    public static final String STATEKEY = "state";
 
     private SeekBar traitsBar = null;
     private TextView traitBar = null;
@@ -64,10 +80,17 @@ public class TraitsInput extends AppCompatActivity {
                 int trait = -1;
                 try {
                     trait = Integer.parseInt(traitTextInput.getText().toString());
-                } catch (NumberFormatException e){
+                    if (trait > 10) {
+                        throw new NumberFormatException();
+                    }
+                    traitOne.setText("Stress Level: " + trait);
 
-                }
-                traitOne.setText("Stress Level: " + trait);
+                    SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+
+
+
+                } catch (NumberFormatException e) {}
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
