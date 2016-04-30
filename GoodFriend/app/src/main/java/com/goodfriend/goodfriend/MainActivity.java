@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             userState = Habit.UserState.NORMAL;
         }
 
+        /*Tom Added*/
+        startService(new Intent(getBaseContext(), NotificationSender.class));
 
         setContentView(R.layout.activity_main);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         long currentTime = System.currentTimeMillis();
         //divide by 1000 for ms->s then by 86400 for s->days
         long days = ((currentTime - startTime)/1000)/86400;
-        dayCounter.setText(days+"");
+        dayCounter.setText(days + "");
     }
 
     @Override
@@ -175,4 +177,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Method to stop the service
+    public void stopService(View view) {
+        stopService(new Intent(getBaseContext(), NotificationSender.class));
+    }
 }
