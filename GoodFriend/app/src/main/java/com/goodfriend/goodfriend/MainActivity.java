@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import java.text.SimpleDateFormat;
@@ -49,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     private static Habit.UserState userState;
 
-    private String [] friendlyAdviceList = {
-                    "Try going outside and taking 10 deep breaths!" +
+    private ArrayList<String> friendlyAdviceList = new ArrayList<String>(Arrays.asList(
+            "Try going outside and taking 10 deep breaths!" +
                     "Socialize! Spark up a conversation with the person closest to you" +
                     "Find a time to hug your closest friend =)" +
                     "Think good thoughts! Mentally recite 10 things you are thankful for!"
-    };
+    ));
     private Button smokeButton = null;
 
 
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 text = "Some Risk";
             else if (text.equals("HIGH_RISK")) {
                 text = "High Risk";
-
+            sendNotification(friendlyAdviceList.get((int)Math.random()*(friendlyAdviceList.size()+1)));
                 //INSERT STUFF HERE
             }
             TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
@@ -201,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
                         .setSmallIcon(R.mipmap.heart)
                         .setContentTitle("Hey!")
                         .setContentText(message);
+        /*Have an activity to launch*/
+        if(!(friendlyAdviceList.contains(message))) {
         Intent resultIntent = new Intent(this, TraitsInput.class);
         // Because clicking the notification opens a new ("special") activity, there's
         // no need to create an artificial back stack.
@@ -213,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 );
 
         mBuilder.setContentIntent(resultPendingIntent);
-
+        }
         // Sets an ID for the notification
         int mNotificationId = 001;
         // Gets an instance of the NotificationManager service
@@ -222,10 +225,5 @@ public class MainActivity extends AppCompatActivity {
         // Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-    }
-    public void statusNotificationChecker() {
-        if(true){
-        sendNotification("How are you?");
-        }
     }
 }
