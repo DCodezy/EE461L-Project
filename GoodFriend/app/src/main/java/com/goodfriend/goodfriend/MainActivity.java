@@ -183,32 +183,6 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
            sendNotification("How are you?");
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.mipmap.heart)
-                            .setContentTitle("My notification")
-                            .setContentText("Hello World!");
-            Intent resultIntent = new Intent(this, TraitsInput.class);
-            // Because clicking the notification opens a new ("special") activity, there's
-            // no need to create an artificial back stack.
-            PendingIntent resultPendingIntent =
-                    PendingIntent.getActivity(
-                            this,
-                            0,
-                            resultIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                    );
-
-            mBuilder.setContentIntent(resultPendingIntent);
-
-            // Sets an ID for the notification
-            int mNotificationId = 001;
-            // Gets an instance of the NotificationManager service
-            NotificationManager mNotifyMgr =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            // Builds the notification and issues it.
-            mNotifyMgr.notify(mNotificationId, mBuilder.build());
-
             return true;
         }
         else if (id == R.id.setStress){
