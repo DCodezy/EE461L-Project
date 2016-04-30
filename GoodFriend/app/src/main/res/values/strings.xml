@@ -4,4 +4,5 @@
     <string name="title_activity_traits_input">TraitsInput</string>
     <string name="title_add_habit">Add Habit</string>
     <string name="test_Notification">Test Notification</string>
+    <string name="set_stress">Input Stress</string>
 </resources>

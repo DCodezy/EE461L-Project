@@ -201,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         }
+        else if (id == R.id.setStress){
+            Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
+            startActivity(intent);
+        }
         
 
         return super.onOptionsItemSelected(item);
