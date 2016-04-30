@@ -145,9 +145,11 @@ public class MainActivity extends AppCompatActivity {
                 text = "Normal";
             else if (text.equals("MED_RISK"))
                 text = "Some Risk";
-            else if (text.equals("HIGH_RISK"))
+            else if (text.equals("HIGH_RISK")) {
                 text = "High Risk";
 
+                //INSERT STUFF HERE
+            }
             TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
             box1_subtext.setText(text);
 

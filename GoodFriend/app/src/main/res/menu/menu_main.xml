@@ -8,11 +8,6 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
-        android:id="@+id/testNotification"
-        android:orderInCategory="200"
-        android:title="@string/test_Notification"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/setStress"
         android:orderInCategory="200"
         android:title="@string/set_stress"
