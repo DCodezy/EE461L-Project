@@ -80,28 +80,8 @@ public class MainActivity extends AppCompatActivity {
             //setContentView(R.layout.habit_select);
         }
         //else {
-            /*Tom Added*/
-                startService(new Intent(getBaseContext(), NotificationSender.class));
 
-                setContentView(R.layout.activity_main);
-            /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);*/
-                Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-                setSupportActionBar(mToolbar);
-                getSupportActionBar().setTitle(getDayOfWeek());
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-                Button tempButton = (Button) findViewById(R.id.tempButton);
-
-                tempButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
-                        startActivity(intent);
-                    }
-                });
-
-<<<<<<< HEAD
         sendNotification();
 
         setContentView(R.layout.activity_main);
@@ -122,9 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } );
 
-=======
     }
->>>>>>> 3c921afac5560b05f3cb7c6ee4263857cf6fc5e2
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
