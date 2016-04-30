@@ -44,8 +44,8 @@ public class TraitsInput extends AppCompatActivity {
 
         traitsBar = (SeekBar) findViewById(R.id.seek1);
         traitBar = (TextView) findViewById(R.id.traitBar);
-        traitOne = (TextView) findViewById(R.id.trait1);
-        traitTextInput = (EditText) findViewById(R.id.textInput);
+        //traitOne = (TextView) findViewById(R.id.trait1);
+        //traitTextInput = (EditText) findViewById(R.id.textInput);
         submitButton = (Button) findViewById(R.id.buttonInput);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
