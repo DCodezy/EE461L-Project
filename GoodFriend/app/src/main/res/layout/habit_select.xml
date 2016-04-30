@@ -25,7 +25,7 @@
             android:layout_height="fill_parent"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Welcomd to Goodfriend!"
+            android:text="Welcome to Goodfriend!"
             android:textColor="#ffffff"
             android:textSize="30sp" />
 
