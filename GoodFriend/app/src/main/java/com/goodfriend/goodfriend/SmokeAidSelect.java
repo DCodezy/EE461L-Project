@@ -70,7 +70,7 @@ public class SmokeAidSelect extends AppCompatActivity {
                     userState = Habit.UserState.NORMAL;
                 }
 
-                editor.putBoolean(INITKEY, Boolean.FALSE);
+                editor.putBoolean(INITKEY, Boolean.TRUE);
 
                 editor.commit();
                 System.out.println("nnnnnnnnn\n");
