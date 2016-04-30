@@ -47,17 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static Habit.UserState userState;
 
-<<<<<<< HEAD
     private String [] friendlyAdviceList = {
                     "Try going outside and taking 10 deep breaths!" +
                     "Socialize! Spark up a conversation with the person closest to you" +
                     "Find a time to hug your closest friend =)" +
                     "Think good thoughts! Mentally recite 10 things you are thankful for!"
     };
-=======
     private Button smokeButton = null;
 
->>>>>>> c195d62b3ae5ed074cce979bd705aa4f444bf780
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-<<<<<<< HEAD
         //else {
 
         sendNotification("How are you?");
@@ -121,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         } );
-=======
         else {
             /*Tom Added*/
             startService(new Intent(getBaseContext(), NotificationSender.class));
@@ -145,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         
->>>>>>> c195d62b3ae5ed074cce979bd705aa4f444bf780
 
     }
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -219,9 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-<<<<<<< HEAD
            sendNotification("How are you?");
-=======
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.mipmap.heart)
@@ -248,7 +240,6 @@ public class MainActivity extends AppCompatActivity {
             // Builds the notification and issues it.
             mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
->>>>>>> c195d62b3ae5ed074cce979bd705aa4f444bf780
             return true;
         }
         
