@@ -1,6 +1,7 @@
 package com.goodfriend.goodfriend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -34,6 +35,10 @@ public class TraitsInput extends AppCompatActivity {
     private TextView traitOne = null;
     private EditText traitTextInput = null;
     private Button submitButton = null;
+
+    public void returnToSender(){
+        this.finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +75,7 @@ public class TraitsInput extends AppCompatActivity {
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-                traitBar.setText("Stress Level: " + progressChanged);
+                traitBar.setText(progressChanged+"");
             }
         });
 
@@ -79,7 +84,8 @@ public class TraitsInput extends AppCompatActivity {
             public void onClick(View v) {
                 int trait = -1;
                 try {
-                    trait = Integer.parseInt(traitTextInput.getText().toString());
+                    String text = traitBar.getText().toString();
+                    trait = Integer.parseInt(text);
                     if (trait > 10) {
                         throw new NumberFormatException();
                     }
@@ -95,8 +101,10 @@ public class TraitsInput extends AppCompatActivity {
                     SharedPreferences.Editor editor = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
                     editor.putString(STATEKEY, h.getState().toString());
                     editor.commit();
+                    finish();
 
                 } catch (NumberFormatException e) {
+                    System.out.println("FAILURE");
                 }
 
             }

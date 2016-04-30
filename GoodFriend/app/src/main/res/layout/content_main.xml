@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:text="Mild"
+                    android:text="Unknown"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:textSize="24sp" />

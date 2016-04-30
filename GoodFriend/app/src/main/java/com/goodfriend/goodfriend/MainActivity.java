@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
 
             //store aided key
-            editor.putBoolean(AIDKEY, true);
+            editor.putBoolean(AIDKEY, false);
             editor.commit();
 
             //user starts as normal state
@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         }
         //else {
 
+
+        /*Tom Added*/
+        startService(new Intent(getBaseContext(), NotificationSender.class));
 
         sendNotification();
 
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
                 startActivity(intent);
+
             }
         } );
 
@@ -121,9 +125,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+
+        SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+        String text = session.getString(STATEKEY, "Unknown");
+        if(text.equals("NORMAL"))
+            text = "Normal";
+        else if(text.equals("MED_RISK"))
+            text = "Some Risk";
+        else if(text.equals("HIGH_RISK"))
+            text  = "High Risk";
+
+        TextView box1_subtext = (TextView) findViewById(R.id.box1_subtext);
+        box1_subtext.setText(text);
+
         TextView dayCounter = (TextView) findViewById(R.id.text1);
         //get the current time and the time at initialization
-        SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+
         long startTime = session.getLong(TIMEKEY, -1);
         long currentTime = System.currentTimeMillis();
         //divide by 1000 for ms->s then by 86400 for s->days
