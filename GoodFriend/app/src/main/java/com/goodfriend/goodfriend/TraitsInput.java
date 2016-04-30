@@ -44,8 +44,6 @@ public class TraitsInput extends AppCompatActivity {
 
         traitsBar = (SeekBar) findViewById(R.id.seek1);
         traitBar = (TextView) findViewById(R.id.traitBar);
-        traitOne = (TextView) findViewById(R.id.trait1);
-        traitTextInput = (EditText) findViewById(R.id.textInput);
         submitButton = (Button) findViewById(R.id.buttonInput);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -85,13 +83,29 @@ public class TraitsInput extends AppCompatActivity {
                     if (trait > 10) {
                         throw new NumberFormatException();
                     }
-                    traitOne.setText("Stress Level: " + trait);
 
                     SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
+                    long startTime = session.getLong(TIMEKEY, -1);
+                    long currentTime = System.currentTimeMillis();
+                    //divide by 1000 for ms->s then by 86400 for s->days
+                    long days = ((currentTime - startTime) / 1000) / 86400;
+                    NicotineHabit h = new NicotineHabit(session.getBoolean(AIDKEY, true));
+                    h.recalculateState((int) days, trait);
+                    Habit.UserState x = h.getState();
+                    if (x.equals(Habit.UserState.HIGH_RISK)) {
+                        traitOne.setText("Your Current State is:" + "High Risk");
+                    }
+                    else if (x.equals(Habit.UserState.MED_RISK)) {
+                        traitOne.setText("Your Current State is:" + "Medium Risk");
+                    }
+                    else if (x.equals(Habit.UserState.NORMAL)) {
+                        traitOne.setText("Your Current State is:" + "Normal");
+                    }
 
 
 
-                } catch (NumberFormatException e) {}
+                } catch (NumberFormatException e) {
+                }
 
             }
         });
