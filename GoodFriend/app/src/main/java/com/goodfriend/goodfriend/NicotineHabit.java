@@ -16,7 +16,7 @@ public class NicotineHabit extends Habit{
 
     private static boolean aid;
 
-    private NicotineHabit(boolean aid){
+    public NicotineHabit(boolean aid){
         this.aid = aid;
     }
 
