@@ -95,15 +95,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getDayOfWeek());
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            Button tempButton = (Button) findViewById(R.id.tempButton);
-
-            tempButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), TraitsInput.class);
-                    startActivity(intent);
-                }
-            });
         }
         
 
