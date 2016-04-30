@@ -2,7 +2,7 @@ package com.goodfriend.goodfriend;
 
 import java.util.Arrays;
 
-public class NicotineHabit extends Habit {
+public class NicotineHabit extends Habit{
 
     //days / relapse percent with drug aid
     private int[][] aidedData = {{0,7},{2,18},{4,29},{6,32},{8,38},{10,41},{12,43},{20,50},{30,58},
@@ -14,11 +14,12 @@ public class NicotineHabit extends Habit {
 
     private int[] milestones = {0,2,4,6,12,30,60,90,300};
 
-    private boolean aid;
+    private static boolean aid;
 
-    public NicotineHabit(boolean aid){
+    private NicotineHabit(boolean aid){
         this.aid = aid;
     }
+
 
     public int getPercent(int days){
         int upper = -1, lower = -1, i;

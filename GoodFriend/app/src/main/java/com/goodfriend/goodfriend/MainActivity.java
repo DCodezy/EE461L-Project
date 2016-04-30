@@ -15,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String INITKEY = "init";
     //key for initial launch time stamp
     public static final String TIMEKEY = "time";
+    //key for aided/unaided
+    public static final String AIDKEY = "aid";
+    //key for current user state
+    public static final String STATEKEY = "state";
+
+    private static Habit.UserState userState;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +46,25 @@ public class MainActivity extends AppCompatActivity {
         //Has this app been launched before?
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
         if(!initialized){
+
             //set initialized to true
             SharedPreferences.Editor editor = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE).edit();
             editor.putBoolean(INITKEY, Boolean.TRUE);
             editor.commit();
+
             //perform initialization actions
             //store current timestamp for future use
             editor.putLong(TIMEKEY, System.currentTimeMillis());
             editor.commit();
+
+            //store aided key
+            editor.putBoolean(AIDKEY, true);
+            editor.commit();
+
+            //user starts as normal state
+            editor.putString(STATEKEY, Habit.UserState.NORMAL.toString());
+            editor.commit();
+            userState = Habit.UserState.NORMAL;
         }
 
 
