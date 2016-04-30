@@ -12,5 +12,9 @@
         android:orderInCategory="200"
         android:title="@string/test_Notification"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/setStress"
+        android:orderInCategory="200"
+        android:title="@string/set_stress"
+        app:showAsAction="never" />
 </menu>
