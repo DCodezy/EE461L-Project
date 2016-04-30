@@ -26,7 +26,7 @@ public class NicotineHabit extends Habit{
 
         if(aid) {
             if(days > 360)
-                return aidedData[aidedData.length][1];
+                return aidedData[aidedData.length-1][1];
 
             for (i = 0; i < aidedData.length; i++){
                 if(aidedData[i][0] >= days){
@@ -55,7 +55,7 @@ public class NicotineHabit extends Habit{
 
         else{
             if(days > 360)
-                return unaidedData[unaidedData.length][1];
+                return unaidedData[unaidedData.length-1][1];
 
             for (i = 0; i < aidedData.length; i++){
                 if(unaidedData[i][0] >= days){
