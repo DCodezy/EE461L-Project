@@ -194,11 +194,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
                 
-                <Button
-                    android:id = "@+id/notificationTestButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start Notification One!" />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

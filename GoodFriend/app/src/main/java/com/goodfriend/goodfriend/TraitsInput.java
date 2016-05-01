@@ -34,8 +34,6 @@ public class TraitsInput extends AppCompatActivity {
 
     private SeekBar traitsBar = null;
     private TextView traitBar = null;
-    private TextView traitOne = null;
-    private EditText traitTextInput = null;
     private Button submitButton = null;
 
     public void returnToSender(){
@@ -49,10 +47,12 @@ public class TraitsInput extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //create references for UI elements
         traitsBar = (SeekBar) findViewById(R.id.seek1);
         traitBar = (TextView) findViewById(R.id.traitBar);
         submitButton = (Button) findViewById(R.id.buttonInput);
 
+        // below is commented out for future (possible) use. floating action button at bottom right (mail icon)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class TraitsInput extends AppCompatActivity {
             }
         });
 
-
+        //action listener for stress seek bar: updates text field below as user scrolls
         traitsBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 0;
 
@@ -81,6 +81,10 @@ public class TraitsInput extends AppCompatActivity {
             }
         });
 
+        //once user selects this:
+        //          - Calculate new user state
+        //          - Store new data
+        //          - Close activity and return to main activity
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

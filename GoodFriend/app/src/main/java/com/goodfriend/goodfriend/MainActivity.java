@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String STATEKEY = "state";
     //key for last stress input
     public static final String STRESSKEY = "stress";
-
+    //current user state for listener
     private static Habit.UserState userState;
 
     private ArrayList<String> friendlyAdviceList = new ArrayList<String>(Arrays.asList(
@@ -69,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences session = this.getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
         //Has this app been launched before?
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
+        //if not, perform initialization actions
         if(!initialized){
+            //send user to the initialization page to choose the habit and other options
             setContentView(R.layout.habit_select);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -90,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString(STATEKEY, Habit.UserState.NORMAL.toString());
                     editor.commit();
                     userState = Habit.UserState.NORMAL;
-                    
+
+                    //send to smoke aid select screen
                     Intent intent = new Intent(getApplicationContext(), SmokeAidSelect.class);
                     startActivity(intent);
                 }
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else {
-
+            //if it has been initialized before, run normally
             setContentView(R.layout.activity_main);
             /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);*/
@@ -121,11 +124,13 @@ public class MainActivity extends AppCompatActivity {
         });*/
    // }
 
+    //return the day of the week using current system epoch time
     public String getDayOfWeek(){
         String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
         return weekday_name;
     }
 
+    //called whenever the user reaches the main activity screen
     @Override
     protected void onResume(){
         super.onResume();
@@ -133,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences session = getSharedPreferences(PREFKEY, Context.MODE_PRIVATE);
 
         boolean initialized = session.getBoolean(INITKEY, Boolean.FALSE);
+        //if this is post initialization, set the user state and user stress boxes
         if(initialized) {
             String text = session.getString(STATEKEY, "Unknown");
             if (text.equals("NORMAL"))
@@ -150,12 +156,10 @@ public class MainActivity extends AppCompatActivity {
             TextView box2_subtext = (TextView) findViewById(R.id.box2_subtext);
             box2_subtext.setText(session.getInt(STRESSKEY, 0)+"");
 
-        System.out.println(initialized + " above method");
-
             System.out.println("inside method");
+
             TextView dayCounter = (TextView) findViewById(R.id.text1);
             //get the current time and the time at initialization
-
             long startTime = session.getLong(TIMEKEY, -1);
             long currentTime = System.currentTimeMillis();
             //divide by 1000 for ms->s then by 86400 for s->days
